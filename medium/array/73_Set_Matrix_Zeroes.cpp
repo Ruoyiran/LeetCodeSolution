@@ -43,7 +43,7 @@ Could you devise a constant space solution?
 */
 class Solution {
 public:
-    void setZeroes(vector<vector<int>>& matrix) {
+    void setZeroesV1(vector<vector<int>>& matrix) {
         if (matrix.empty() | matrix[0].empty()) {
             return;
         }
@@ -68,17 +68,57 @@ public:
             }
         }
     }
+
+    void setZeroes(vector<vector<int>>& matrix) {
+        if (matrix.empty() | matrix[0].empty()) {
+            return;
+        }
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+        bool zeroFirstRow = false;
+        bool zeroFirstCol = false;
+        for (int r = 0; r < rows; ++r) {
+            for (int c = 0; c < cols; ++c) {
+                if (r == 0 && matrix[r][c] == 0) {
+                    zeroFirstRow = true;
+                }
+                if (c == 0 && matrix[r][c] == 0) {
+                    zeroFirstCol = true;
+                }
+                if (r > 0 && c > 0 && matrix[r][c] == 0) {
+                    matrix[r][0] = 0;
+                    matrix[0][c] = 0;
+                }
+            }
+        }
+        for (int r = 1; r < rows; ++r) {
+            for (int c = 1; c < cols; ++c) {
+                if (matrix[r][0] == 0 || matrix[0][c] == 0) {
+                    matrix[r][c] = 0;
+                }
+            }
+        }
+
+        if (zeroFirstCol) {
+            for (int r = 0; r < rows; ++r) {
+                matrix[r][0] = 0;
+            }
+        }
+        if (zeroFirstRow) {
+            for (int c = 0; c < cols; ++c) {
+                matrix[0][c] = 0;
+            }
+        }
+    }
 };
 
 int main() {
     vector<vector<int>> matrix = {
             {0,1,2,0},
-            {3,4,5,2},
+            {3,4,0,2},
             {1,3,1,5}
     };
     Solution().setZeroes(matrix);
-    for (auto& r : matrix) {
-        printVector(r);
-    }
+    printMatrix(matrix);
     return 0;
 }

@@ -47,7 +47,8 @@ struct TreeNode {
     int val;
     TreeNode *left;
     TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    TreeNode *next;
+    TreeNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
 };
 
 struct NodeSum {
@@ -108,11 +109,18 @@ ListNode* buildList(const vector<int> &vals) {
 
 template <typename T>
 void printVector(const vector<T> &nums, const std::string& sep) {
-    for (T v : nums) {
+    for (const T& v : nums) {
         cout << v << sep;
     }
     if (!nums.empty()) {
         cout << endl;
+    }
+}
+
+template <typename T>
+void printMatrix(const vector<vector<T>> &matrix, const std::string& sep) {
+    for (const T& row : matrix) {
+        printVector<T>(row, sep);
     }
 }
 
@@ -123,6 +131,13 @@ void printVector(const vector<int> &nums, const std::string& sep=" ") {
     }
     if (!nums.empty()) {
         cout << endl;
+    }
+}
+
+template <typename T = int>
+void printMatrix(const vector<vector<int>> &matrix, const std::string& sep = " ") {
+    for (const vector<int>& row : matrix) {
+        printVector(row, sep);
     }
 }
 
@@ -196,6 +211,33 @@ int getTreeLevel(int num) {
         ++level;
     }
     return level;
+}
+
+void printTreeLevelV2(TreeNode* root) {
+    if (root == NULL) {
+        return;
+    }
+    queue<TreeNode*> curr, next;
+    curr.push(root);
+    while (!curr.empty()) { // BFS
+        while (!curr.empty()) {
+            auto node = curr.front(); curr.pop();
+            std::cout << node->val;
+            if (node->next) {
+                std::cout << " # ";
+            } else {
+                std::cout << " ";
+            }
+            if (node->left) {
+                next.push(node->left);
+            }
+            if (node->right) {
+                next.push(node->right);
+            }
+        }
+        curr.swap(next);
+        std::cout <<std::endl;
+    }
 }
 
 void printTreeLevel(TreeNode* root) {
