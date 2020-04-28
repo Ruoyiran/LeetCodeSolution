@@ -4,7 +4,18 @@
 
 #include "common.h"
 
-// 给定一个包含 0, 1, 2, …, n 中 n 个数的序列，找出 0 … n 中没有出现在序列中的那个数。
+/*
+Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
+
+Example 1:
+
+Input: [3,0,1]
+Output: 2
+Example 2:
+
+Input: [9,6,4,2,3,5,7,0,1]
+Output: 8
+*/
 class Solution {
 private:
     void swap(vector<int>& nums, int i, int j){
