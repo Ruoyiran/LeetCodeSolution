@@ -20,6 +20,7 @@
 #include <sstream>
 #include <string.h>
 #include <limits.h>
+#include <math.h>
 
 using namespace std;
 
