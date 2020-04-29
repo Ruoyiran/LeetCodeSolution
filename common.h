@@ -21,6 +21,7 @@
 #include <string.h>
 #include <limits.h>
 #include <math.h>
+#include <functional>
 
 using namespace std;
 
@@ -119,7 +120,7 @@ void printVector(const vector<T> &nums, const std::string& sep) {
 
 template <typename T>
 void printMatrix(const vector<vector<T>> &matrix, const std::string& sep) {
-    for (const T& row : matrix) {
+    for (const vector<T>& row : matrix) {
         printVector<T>(row, sep);
     }
 }
@@ -137,6 +138,13 @@ void printVector(const vector<int> &nums, const std::string& sep=" ") {
 template <typename T = int>
 void printMatrix(const vector<vector<int>> &matrix, const std::string& sep = " ") {
     for (const vector<int>& row : matrix) {
+        printVector(row, sep);
+    }
+}
+
+template <typename T = char>
+void printMatrix(const vector<vector<char>> &matrix, const std::string& sep = " ") {
+    for (const vector<char>& row : matrix) {
         printVector(row, sep);
     }
 }
