@@ -1,6 +1,10 @@
 //
-// Created by ranpeng on 2020/4/16.
+// Created by ranpeng on 2020/4/30.
 //
+
+#ifndef LEETCODE_TRIE_H
+#define LEETCODE_TRIE_H
+
 #include "common.h"
 
 struct TrieNode {
@@ -9,13 +13,6 @@ struct TrieNode {
     TrieNode() : isWord(false) {}
 };
 
-/*
-Implement a trie with insert, search, and startsWith methods.
-
-Note:
-
-You may assume that all inputs are consist of lowercase letters a-z.
- */
 class Trie {
 public:
     /** Initialize your data structure here. */
@@ -27,8 +24,14 @@ public:
         delete root;
     }
 
+    void insert(const std::vector<string>& words) {
+        for (const auto& word : words) {
+            insert(word);
+        }
+    }
+
     /** Inserts a word into the trie. */
-    void insert(string word) {
+    void insert(const string& word) {
         auto node = root;
         for(char c : word) {
             if (node->child.find(c) == node->child.end()) {
@@ -40,7 +43,7 @@ public:
     }
 
     /** Returns if the word is in the trie. */
-    bool search(string word) {
+    bool search(const string& word) {
         auto node = traverse(word);
         return node != NULL && node->isWord;
     }
@@ -49,6 +52,11 @@ public:
     bool startsWith(string prefix) {
         auto node = traverse(prefix);
         return node != NULL;
+    }
+
+public:
+    TrieNode* getRoot() {
+        return root;
     }
 
 private:
@@ -66,13 +74,4 @@ private:
     TrieNode* root;
 };
 
-int main() {
-    Trie trie;
-    trie.insert("apple");
-    cout << boolalpha << trie.search("apple") << endl;   // returns true
-    cout << boolalpha << trie.search("app") << endl;     // returns false
-    cout << boolalpha << trie.startsWith("app") << endl; // returns true
-    trie.insert("app");
-    cout << boolalpha << trie.search("app") << endl;     // returns true
-    return 0;
-}
+#endif //LEETCODE_TRIE_H

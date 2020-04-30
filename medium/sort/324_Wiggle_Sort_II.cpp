@@ -40,7 +40,7 @@ public:
             if (nums[index(i)] < mid) { // 小于中位数就将其从右往左放在偶数位置
                 std::swap(nums[index(i)], nums[index(high--)]);
             } else if (nums[index(i)] > mid) { // 大于中位数就将其从左往右放奇数位置
-                std::swap(nums[index(i)], nums[index(low++)]);
+                std::swap(nums[index(i++)], nums[index(low++)]);
             } else {
                 ++i;
             }
