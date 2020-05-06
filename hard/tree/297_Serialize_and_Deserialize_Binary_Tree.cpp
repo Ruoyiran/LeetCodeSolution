@@ -94,19 +94,6 @@ private:
         }
         return root;
     }
-
-    void splitString(const std::string& s, vector<string>& res) {
-        res.clear();
-        if (s.empty()) {
-            return;
-        }
-        int start = 0, end = 0;
-        while ((end = s.find(",", start)) != string::npos) {
-            res.push_back(s.substr(start, end-start));
-            start = end+1;
-        }
-        res.push_back(s.substr(start, s.size()-start));
-    }
 };
 
 int main() {

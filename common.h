@@ -332,4 +332,16 @@ TreeNode* buildTree(const vector<int>& nums, int nullValue = -1) {
     return root;
 }
 
+void splitString(const std::string& s, vector<string>& res, const std::string& sep = ",") {
+    res.clear();
+    if (s.empty()) {
+        return;
+    }
+    int start = 0, end = 0;
+    while ((end = s.find(sep, start)) != string::npos) {
+        res.push_back(s.substr(start, end-start));
+        start = end+1;
+    }
+    res.push_back(s.substr(start, s.size()-start));
+}
 #endif //LEETCODE_COMMON_H
