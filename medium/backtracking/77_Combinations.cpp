@@ -40,6 +40,7 @@ private:
     void helper(const vector<int> &nums, int k, int start, vector<int> &candidates, vector<vector<int>> &results) {
         if (candidates.size() == k) {
             results.push_back(candidates);
+            return;
         }
         for (int i = start; i < nums.size(); ++i) {
             candidates.push_back(nums[i]);

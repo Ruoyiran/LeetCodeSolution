@@ -24,18 +24,18 @@ public:
         if (nums.size() == 2) {
             return std::max(nums[0], nums[1]);
         }
-//        std::vector<int> dp = {nums[0], std::max(nums[0], nums[1])};
-        int t1 = nums[0];
-        int t2 = std::max(nums[0], nums[1]);
-        int max = 0;
+        std::vector<int> dp = {nums[0], std::max(nums[0], nums[1])};
+        // int t1 = nums[0];
+        // int t2 = std::max(nums[0], nums[1]);
+        // int max = 0;
         for (int i = 2; i < nums.size(); ++i) {
-//            dp.push_back(std::max(dp[i-2]+nums[i], dp[i-1]));
-            max = std::max(t1 + nums[i], t2);
-            t1 = t2;
-            t2 = max;
+            dp.push_back(std::max(dp[i-2]+nums[i], dp[i-1]));
+            // max = std::max(t1 + nums[i], t2);
+            // t1 = t2;
+            // t2 = max;
         }
-//        return dp.back();
-        return max;
+        return dp.back();
+        // return max;
     }
 };
 
